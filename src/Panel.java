@@ -2,24 +2,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.Scanner;
 
-public class importar extends JFrame implements ActionListener {
+public class Panel extends JPanel implements ActionListener {
+
     JButton btnImportar = new JButton("Importar");
     JButton btnEliminar = new JButton("Eliminar");
     JButton btnSalir = new JButton("Salir");
     DefaultTableModel registro = new DefaultTableModel();
     JTable tabla;
     File archivo;
-    FileReader fr;
-    BufferedReader bw;
     private Lista<Persona> listaPersona = new Lista<>();
 
-    public importar() {
+    public Panel() {
         setLayout(null);
         registro.addColumn("Nombre");
         registro.addColumn("Genero");
@@ -39,7 +36,6 @@ public class importar extends JFrame implements ActionListener {
         btnSalir.addActionListener(this);
         add(btnSalir);
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
 
@@ -60,9 +56,6 @@ public class importar extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
         }
-        if (e.getSource() == btnSalir) {
-            System.exit(0);
-        }
 
         if (e.getSource() == btnEliminar) {
             int filaElegida = tabla.getSelectedRow();
@@ -76,14 +69,9 @@ public class importar extends JFrame implements ActionListener {
             }
             System.out.println(listaPersona);
         }
-    }
 
-    public static void main(String[] args) {
-        importar i = new importar();
-        i.setBounds(0, 0, 700, 600);
-        i.setVisible(true);
-        i.setResizable(false);
-        i.setLocationRelativeTo(null);
-
+        if (e.getSource() == btnSalir) {
+            System.exit(0);
+        }
     }
 }
